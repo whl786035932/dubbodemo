@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<context:component-scan base-package="dubboweb" />
+	<dubbo:application name="dubbo_consumer"></dubbo:application>
+	<!--使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry address="10.2.17.65:2182" protocol="zookeeper"></dubbo:registry>
+	<!--要暴露的服务接口 -->
+	<dubbo:reference interface="dubboservice.TestService" id="testService" />
+	<dubbo:reference interface="dubboservice.UserService" id="userServiceImpl" />
+	<!-- retries设置重试次数，Failover Cluster 失败自动切换，重试其他服务器 -->
+	<dubbo:reference interface="dubboservice.TestZooClusterService" id="testZooClusterServiceImpl" retries="2"  loadbalance="random" />
+
+</beans>
