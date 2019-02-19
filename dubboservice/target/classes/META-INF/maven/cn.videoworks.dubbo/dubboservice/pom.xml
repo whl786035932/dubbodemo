@@ -1,0 +1,63 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>cn.videoworks.dubbo</groupId>
+  <artifactId>dubboservice</artifactId>
+  <version>0.0.1</version>
+  <packaging>jar</packaging>
+
+  <name>dubboservice</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<slf4j.version>1.7.5</slf4j.version>
+	<util-commons.version>3.0.4-SNAPSHOT</util-commons.version>
+	<httpclient.version>4.4.1</httpclient.version>
+	<dao-commons.version>2.0.6-SNAPSHOT</dao-commons.version>
+  </properties>
+  
+  <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.0.2</version>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                        <encoding>utf8</encoding>
+                    </configuration>
+                </plugin>
+               
+  				<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<configuration>
+						<appendAssemblyId>false</appendAssemblyId>
+						<descriptorRefs>
+							<descriptorRef>jar-with-dependencies</descriptorRef>
+						</descriptorRefs>
+						<archive>
+							<manifest>
+								<!-- 此处指定main方法入口的class -->
+								<!-- 打包 mvn clean mvn assembly:assembly  mvn package-->
+								<mainClass>cn.videoworks.gearman.Main</mainClass>
+							</manifest>
+						</archive>
+					</configuration>
+					<executions>
+						<execution>
+							<id>make-assembly</id>
+							<phase>package</phase>
+							<goals>
+								<goal>assembly</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+                
+            </plugins>
+        </pluginManagement>
+  </build>
+</project>
